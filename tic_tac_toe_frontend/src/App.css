@@ -1,104 +1,124 @@
-/* CSS Variables for Theme Management */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
+  --bg-primary: #fff;
   --bg-secondary: #f8f9fa;
   --text-primary: #282c34;
-  --text-secondary: #61dafb;
+  --text-secondary: #1E90FF;
+  --ttt-x: #1E90FF;
+  --ttt-o: #FFD700;
+  --ttt-accent: #FF69B4;
   --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --button-bg: #1E90FF;
+  --button-text: #fff;
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
-}
-
+/* App and Layout */
 .App {
   text-align: center;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+/* Header */
+.App header {
+  font-family: inherit;
+  margin-bottom: 0.7em;
+}
+
+.ttt-board {
+  margin: 0.8em auto;
+}
+
+.ttt-square {
+  outline: none;
+  border: 2px solid #e7eaf3;
+  background: #fff;
+  margin: 2px;
+  border-radius: 14px;
+  font-size: 2.5rem;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(30,144,255,0.06);
+  transition: box-shadow 0.13s, border-color 0.13s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ttt-square:disabled {
+  cursor: default;
+  opacity: 0.84;
+}
+
+.ttt-square:focus {
+  border-color: var(--ttt-accent);
+  box-shadow: 0 0 7px 1px var(--ttt-accent);
+}
+
+/* Brand scoreboard styles */
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-top: 1.2rem;
+}
+
+/* Restart button */
+.restart-btn {
+  background: linear-gradient(90deg, #FF69B4 0%, #1E90FF 100%);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.9em 2em;
+  margin-top: 0.2em;
+  margin-bottom: 1.6em;
+  box-shadow: 0 2px 12px #ff69b433;
+  cursor: pointer;
+  transition: all 0.16s;
+}
+.restart-btn:hover,
+.restart-btn:focus {
+  background: linear-gradient(90deg, #1E90FF 0%, #FF69B4 100%);
+  box-shadow: 0 5px 14px #FF69B433;
+}
+
+/* Status Message */
+.status-message {
+  min-height: 1.6em;
+  font-size: 1.18em;
+  margin-bottom: 0.25em;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+  .ttt-board {
+    grid-template-columns: repeat(3, 52px) !important;
+    grid-template-rows: repeat(3, 52px) !important;
+    padding: 7px 6px 3px 6px !important;
+  }
+  .ttt-square {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.38rem !important;
+  }
+  .restart-btn {
+    font-size: 0.95rem;
+    padding: 0.6em 1.2em;
+  }
+  header {
+    font-size: 1.3em !important;
+  }
+}
+
+footer {
+  margin-top: auto;
 }
 
 .theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
-}
-
-.theme-toggle:active {
-  transform: translateY(0);
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+  display: none; /* Always light theme: no toggle */
 }
